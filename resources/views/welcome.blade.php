@@ -89,7 +89,7 @@ $(".home-btn").click(function(e) {
 function loadIframe(url) {
     var $iframe = $('#ifrm');
     if ( $iframe.length ) {
-        $iframe.attr('src','https://metatrial.shinyapps.io/Hack2/?link=https://metatrial.shinyapps.io/Hack2/?link=' + url);   
+        $iframe.attr('src','https://metatrial.shinyapps.io/Hack2/?link=' + url);   
         return false;
     }
     return true;
