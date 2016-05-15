@@ -41,7 +41,12 @@
 <h1 class="main-h1">You are comparing the effect of <strong class="intervention">Apixaban</strong><br>
 on the incidence of <strong class="outcome"></strong><br>
 in patients with <strong class="condition"></strong>.</h1>
-<iframe src="https://metatrial.shinyapps.io/Hack2/?link=https://metatrial.shinyapps.io/Hack2/"></iframe>
+
+<div class="iframe">
+    <iframe name="ifrm" id="ifrm" src="#" frameborder="0" style="display:none">
+        Your browser doesn't support iframes.
+    </iframe>
+</div>
 
 </div>
 
@@ -81,6 +86,14 @@ $(".home-btn").click(function(e) {
 
   $(".home").delay(2500).fadeOut();
   $(".main-h1").delay(2900).slideDown();
+function loadIframe(url) {
+    var $iframe = $('#ifrm');
+    if ( $iframe.length ) {
+        $iframe.attr('src','https://metatrial.shinyapps.io/Hack2/?link=https://metatrial.shinyapps.io/Hack2/?link=' + url);   
+        return false;
+    }
+    return true;
+}
 
 var condition = $(".home-text[name='condition']").val();
 var intervention = $(".home-text[name='intervention']").val();
@@ -90,16 +103,18 @@ var data = {
   'intervention': intervention,
   'outcome': outcome,
 };
-
+$(".intervention").text(intervention);
+$(".condition").text(condition);
+$(".outcome").text(outcome);
   $.ajax({
     url: '/search',
     method: 'POST',
     data: data, _token:'{!! csrf_token() !!}',
     success: function(data) {
+      loadIframe(data);
       console.log(data);
-      $(".intervention").text(intervention);
-      $(".condition").text(condition);
-      $(".outcome").text(outcome);
+      $("#ifrm").delay(2000).fadeIn();
+
     },
   });
   

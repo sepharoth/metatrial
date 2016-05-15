@@ -115,3 +115,9 @@ MAIN
 			  fill: none;
 			  stroke: #000;
 			}
+#ifrm {
+	margin-top: 30px;
+    width: 800px;
+    height: 500px;
+    margin-bottom: 50px;
+}
