@@ -64,7 +64,7 @@ body {
     height: 40px;
     color: #FF5486;
     background-color: #FFF;
-    font-family: Brandon Grotesque;
+    font-family: 'brandon-grotesque';
     text-transform: uppercase;
     font-weight: 600;
     font-size: 20px;
@@ -83,7 +83,7 @@ MAIN
 ***********************************************************************/
 .main h1 {
 	color: #FFF;
-    font-family: Brandon Grotesque;
+    font-family: 'brandon-grotesque';
     line-height: 50px;
     font-weight: 300;
     font-size: 34px;
