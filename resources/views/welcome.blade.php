@@ -24,11 +24,9 @@
 
     <div class="container home">
 <img src="/images/logo.png" width="350" class="home-logo" />
-<h2 class="subtitle">MetaTrial is the best way in the world to see the data you want.<br>
-Try it out below.</h2>
+<h2 class="subtitle">MetaTrial searches the US Clinical Trials database<br> to give you an at-a-glance answer to your research question.</h2>
 
 <form action='/search' method='post' class="home-form">
-{!! csrf_field() !!}
   <input type="text" name="condition" class="home-text" placeholder="Condition"><br>
   <input type="text" name="intervention" class="home-text" placeholder="Interventions"><br>
   <input type="text" name="outcome" class="home-text" placeholder="Outcome"><br>
@@ -40,9 +38,10 @@ Try it out below.</h2>
 
 
 <div class="container main">
-<h1 class="main-h1">You are comparing the effect of <strong class="intervention1">Apixaban</strong> and <strong class="intervention2">Warfarin</strong><br>
-on the incidence of <strong class="outcome">Bleeding</strong><br>
-in patients with <strong class="condition">Atrial Fibrillation</strong>.</h1>
+<h1 class="main-h1">You are comparing the effect of <strong class="intervention">Apixaban</strong><br>
+on the incidence of <strong class="outcome"></strong><br>
+in patients with <strong class="condition"></strong>.</h1>
+<iframe src="https://metatrial.shinyapps.io/Hack2/?link=https://metatrial.shinyapps.io/Hack2/"></iframe>
 
 </div>
 
@@ -58,7 +57,7 @@ $(".home-btn").click(function(e) {
     width:"0",
     opacity:"0",
   }, 1000, function() {});
-  $(".home-text[name='interventions']").delay(1200).animate({
+  $(".home-text[name='intervention']").delay(1200).animate({
     width:"0",
     opacity:"0",
   }, 1000, function() {});
@@ -78,11 +77,31 @@ $(".home-btn").click(function(e) {
     opacity:'toggle',
     height:'toggle',
   }, 800, function() {});
-  $(".home-form").submit();
+  // $(".home-form").submit();
 
   $(".home").delay(2500).fadeOut();
   $(".main-h1").delay(2900).slideDown();
 
+var condition = $(".home-text[name='condition']").val();
+var intervention = $(".home-text[name='intervention']").val();
+var outcome = $(".home-text[name='outcome']").val();
+var data = {
+  'condition': condition,
+  'intervention': intervention,
+  'outcome': outcome,
+};
+
+  $.ajax({
+    url: '/search',
+    method: 'POST',
+    data: data, _token:'{!! csrf_token() !!}',
+    success: function(data) {
+      console.log(data);
+      $(".intervention").text(intervention);
+      $(".condition").text(condition);
+      $(".outcome").text(outcome);
+    },
+  });
   
 
 });

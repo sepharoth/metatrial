@@ -27,7 +27,7 @@ class SearchController extends Controller
 		        $outcome = "";
 		}
 
-		$GLOBALS['debugLogging'] = true;
+		$GLOBALS['debugLogging'] = false;
        	$this->debugLog('Condition: '.$condition);
        	$this->debugLog('Intervention: '.$intervention);
        	$this->debugLog('Outcome: '.$outcome);
@@ -41,11 +41,20 @@ class SearchController extends Controller
         $json_path = "/public/json/".$cacheKey.".json";
         //dd($result);
         \Storage::put($json_path, $result);
-        $iWantToReturn = "/json/".$cacheKey.".json";
+        $iWantToReturn = "json/".$cacheKey.".json";
         // echo "local JSON location is " . $json_path . "\r\n";
         // echo $result;
-        return $iWantToReturn;
+        //return $iWantToReturn;
 
+        $filename = $iWantToReturn;
+        // This uploads it to S3. Using the settings set in config/aws.php
+        $s3 = \Storage::disk('s3');
+        $s3->put($filename, \Storage::get('public/'.$filename));
+        $bucket = "ukcatninja";
+        $file_link = $s3->getDriver()->getAdapter()->getClient()->getObjectUrl($bucket, $filename);
+        // $s3->put($filename, file_get_contents($image), 'public');
+        // return \Response::json($file_link);
+        return $file_link;
     }
 
     		function debugLog($msg) {
