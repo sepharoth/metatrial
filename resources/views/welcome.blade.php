@@ -23,7 +23,7 @@
   </head>
 
   <body>
-
+<div class="wrapper">
     <div class="container home">
 <img src="/images/logo.png" width="350" class="home-logo" />
 <h2 class="subtitle">MetaTrial searches the US Clinical Trials database<br> to give you an at-a-glance answer to your research question.</h2>
@@ -38,17 +38,13 @@
 </form>
     </div>
 
-
-<div class="container main">
+</div>
+<div class="main">
+<div class="container">
 <h1 class="main-h1">You are comparing the effect of <strong class="intervention">Apixaban</strong><br>
 on the incidence of <strong class="outcome"></strong><br>
 in patients with <strong class="condition"></strong>.</h1>
 
-<div class="iframe">
-    <iframe name="ifrm" id="ifrm" src="#" frameborder="0" style="display:none">
-        Your browser doesn't support iframes.
-    </iframe>
-</div>
 
 </div>
 
@@ -86,6 +82,7 @@ $(".home-btn").click(function(e) {
   }, 800, function() {});
   // $(".home-form").submit();
 
+$(".wrapper").delay(2500).slideUp();
   $(".home").delay(2500).fadeOut();
   $(".main-h1").delay(2900).slideDown();
 function loadIframe(url) {
@@ -116,20 +113,26 @@ $(".outcome").text(outcome);
       loadIframe(data);
       console.log(data);
       $("#ifrm").delay(2000).fadeIn();
-
-    },
-  });
-  
-
-});
-
 var $head = $("#ifrm").contents().find("head");                
 $head.append($("<link/>", 
     { rel: "stylesheet", href: "http://178.62.69.177/css/iframe.css", type: "text/css" }));
+    },
+  
+});
+
+
+});
+
 
 </script>
 
-
-
+</div>
+<div class="container">
+<div class="iframe">
+    <iframe name="ifrm" id="ifrm" src="#" frameborder="0" style="display:none">
+        Your browser doesn't support iframes.
+    </iframe>
+</div>
+</div>
   </body>
 </html>
