@@ -100,7 +100,7 @@ class SearchController extends Controller
                 $files = \Storage::files('public/'.$pathToDownladDirectory);
 
                 foreach ($files as $file) {
-                        if (endsWith($file, '.xml')) {
+                        if ($this->endsWith($file, '.xml')) {
 								$this->debugLog('file: '.$file);          
                                 $xmlContent = new \SimpleXMLElement(\Storage::get($file));
                                 array_push($allXMLs, $xmlContent);
@@ -125,8 +125,9 @@ class SearchController extends Controller
                 $cachePath = $this->getCacheTmpPath($cacheKey);
                 $XMLPath = $cacheKey;
                 $this->debugLog('cachePath: '.$cachePath);
+                $newCachePath = '/public/'.$cacheKey;
                 $allXMLs = array();
-                if (!file_exists($cachePath)) { 
+                if (!\Storage::exists($newCachePath)) { 
                 	$this->debugLog('Cache MISS');                   
                     $this->downladAndUnzip($this->buildRequestURL($condition, $intervention, $outcome), $cacheKey);
                     $allXMLs = $this->readAllXMLsFromDirectory($XMLPath);

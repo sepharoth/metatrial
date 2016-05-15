@@ -53,7 +53,6 @@ in patients with <strong class="condition">Atrial Fibrillation</strong>.</h1>
 <script>
 $(".home-btn").click(function(e) {
   console.log('Submitting form');
-  $(".home-form").submit();
   $(".home-btn-text").text("Loading...");
   $(".home-text[name='condition']").delay(800).animate({
     width:"0",
@@ -79,6 +78,7 @@ $(".home-btn").click(function(e) {
     opacity:'toggle',
     height:'toggle',
   }, 800, function() {});
+  $(".home-form").submit();
 
   $(".home").delay(2500).fadeOut();
   $(".main-h1").delay(2900).slideDown();
