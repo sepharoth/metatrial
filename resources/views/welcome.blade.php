@@ -123,7 +123,9 @@ $(".outcome").text(outcome);
 
 });
 
-
+var $head = $("#ifrm").contents().find("head");                
+$head.append($("<link/>", 
+    { rel: "stylesheet", href: "http://178.62.69.177/css/iframe.css", type: "text/css" }));
 
 </script>
 

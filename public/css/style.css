@@ -121,3 +121,9 @@ MAIN
     height: 500px;
     margin-bottom: 50px;
 }
+
+#ifrm body {
+	    text-align: center;
+    margin: 0 auto 0;
+    background: none !important;
+}
